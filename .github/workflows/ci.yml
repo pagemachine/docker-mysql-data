@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+     - master
+    tags:
+      - '*'
+  pull_request:
+    branches:
+     - master
+  schedule:
+    - cron: '0 7 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./test
+
+    env:
+      BUILD_IMAGE_TAG: ${{ github.run_id }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build & Start
+        run: docker compose up --detach --wait mysql
+
+      - name: Dump & Diff
+        run: >
+          docker compose exec mysql
+          mysqldump --compact --skip-extended-insert db
+          |
+          diff --unified --color expected.sql -
+
+      - name: Cleanup
+        if: ${{ always() }}
+        run: docker compose down --rmi=all --volumes
