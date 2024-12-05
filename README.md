@@ -14,6 +14,11 @@ Before:
 services:
   mysql:
     image: mysql:8.1.0
+    environment:
+      MYSQL_DATABASE: database_name
+      MYSQL_USER: user_name
+      MYSQL_PASSWORD: user_password
+      MYSQL_ROOT_PASSWORD: root_password
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 10s
