@@ -1,4 +1,27 @@
 services:
+  mariadb:
+    build:
+      context: ..
+      additional_contexts:
+        data: ./data
+      args:
+        MYSQL_IMAGE_NAME: mariadb
+        MYSQL_IMAGE_VERSION: 10.5.27
+        MYSQL_DATABASE: db
+        MYSQL_USER: test
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: root
+    environment:
+      MYSQL_PWD: root
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+      start_interval: 2s
+    image: docker-mariadb-data:${BUILD_IMAGE_TAG:?}
+
   mysql:
     build:
       context: ..
