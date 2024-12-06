@@ -93,7 +93,7 @@ After:
 services:
   mariadb:
     build:
-      context: https://github.com/pagemachine/docker-mysql-data.git#0.0.1
+      context: https://github.com/pagemachine/docker-mysql-data.git#x.y.z
       dockerfile: mariadb.Dockerfile
       additional_contexts:
         data: ./data
