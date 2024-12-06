@@ -16,6 +16,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        service:
+          - mariadb
+          - mysql
+
     defaults:
       run:
         working-directory: ./test
@@ -27,14 +33,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build & Start
-        run: docker compose up --detach --wait mysql
+        run: docker compose up --detach --wait ${{ matrix.service }}
 
       - name: Dump & Diff
         run: >
-          docker compose exec mysql
+          docker compose exec ${{ matrix.service }}
           mysqldump --compact --skip-extended-insert db
           |
-          diff --unified --color expected.sql -
+          diff --unified --color --ignore-trailing-space expected/${{ matrix.service }}.sql -
 
       - name: Cleanup
         if: ${{ always() }}
