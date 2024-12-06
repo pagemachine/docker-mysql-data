@@ -2,15 +2,15 @@ services:
   mariadb:
     build:
       context: ..
+      dockerfile: mariadb.Dockerfile
       additional_contexts:
         data: ./data
       args:
-        MYSQL_IMAGE_NAME: mariadb
-        MYSQL_IMAGE_VERSION: 10.5.27
-        MYSQL_DATABASE: db
-        MYSQL_USER: test
-        MYSQL_PASSWORD: test
-        MYSQL_ROOT_PASSWORD: root
+        MARIADB_IMAGE_VERSION: 10.5.27
+        MARIADB_DATABASE: db
+        MARIADB_USER: test
+        MARIADB_PASSWORD: test
+        MARIADB_ROOT_PASSWORD: root
     environment:
       MYSQL_PWD: root
     healthcheck:
@@ -18,13 +18,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
-      start_interval: 2s
     image: docker-mariadb-data:${BUILD_IMAGE_TAG:?}
 
   mysql:
     build:
       context: ..
+      dockerfile: mysql.Dockerfile
       additional_contexts:
         data: ./data
       args:
