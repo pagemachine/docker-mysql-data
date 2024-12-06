@@ -111,9 +111,17 @@ services:
     image: registry.example/my-project/mariadb:latest
 ```
 
-- `build.args.MARIADB_IMAGE_VERSION` must be a valid tag of the `mariadb` Docker image.
+- `build.context` points to the URL of this GitHub repository, the fragment refers
+  to a release, `x.y.z` in this case, try to always use the
+  [latest release](https://github.com/pagemachine/docker-mysql-data/releases).
 - `build.dockerfile` is the `mariadb.Dockerfile`
+- `build.additional_contexts.data` must be defined and point to a local directory
+  with `*.sql`, `.sql.gz` or `.sh` files to use for populating the database on build.
+- `build.args.MARIADB_IMAGE_VERSION` must be a valid tag of the `mariadb` Docker image.
 - `build.args.MARIADB_DATABASE` is the name of the database to create.
 - `build.args.MARIADB_USER` is the username to set up for the database.
 - `build.args.MARIADB_PASSWORD` is the password to set for the database user.
 - `build.args.MARIADB_ROOT_PASSWORD` is the password of the `root` user.
+- `image` should set a persistent image name/tag and a registry to push this image
+  to, this way other users will automatically pull the prebuilt image instead of
+  building it again.
