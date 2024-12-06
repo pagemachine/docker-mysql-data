@@ -1,11 +1,11 @@
 # Docker MySQL image with data
 
-This repository provides a `Dockerfile` to build [MySQL](https://hub.docker.com/_/mysql)
-Docker images with data.
+This repository simplifies building [MySQL](https://hub.docker.com/_/mysql) or
+[MariaDB](https://hub.docker.com/_/mariadb) Docker images with data.
 
 ## Usage
 
-Adjust your Docker Compose MySQL service by adding a `build` section and changing
+Adjust your Docker Compose database service by adding a `build` section and changing
 the `image`.
 
 ### MySQL
