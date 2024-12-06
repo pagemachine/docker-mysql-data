@@ -55,7 +55,7 @@ services:
 - `build.context` points to the URL of this GitHub repository, the fragment refers
   to a release, `x.y.z` in this case, try to always use the
   [latest release](https://github.com/pagemachine/docker-mysql-data/releases).
-- `build.dockerfile` is the `mysql.Dockerfile`
+- `build.dockerfile` is the [`mysql.Dockerfile`](mysql.Dockerfile)
 - `build.additional_contexts.data` must be defined and point to a local directory
   with `*.sql`, `.sql.gz` or `.sh` files to use for populating the database on build.
 - `build.args.MYSQL_IMAGE_VERSION` must be a valid tag of the `mysql` Docker image.
@@ -114,7 +114,7 @@ services:
 - `build.context` points to the URL of this GitHub repository, the fragment refers
   to a release, `x.y.z` in this case, try to always use the
   [latest release](https://github.com/pagemachine/docker-mysql-data/releases).
-- `build.dockerfile` is the `mariadb.Dockerfile`
+- `build.dockerfile` is the [`mariadb.Dockerfile`](mariadb.Dockerfile)
 - `build.additional_contexts.data` must be defined and point to a local directory
   with `*.sql`, `.sql.gz` or `.sh` files to use for populating the database on build.
 - `build.args.MARIADB_IMAGE_VERSION` must be a valid tag of the `mariadb` Docker image.
