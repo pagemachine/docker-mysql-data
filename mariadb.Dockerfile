@@ -23,6 +23,8 @@ RUN docker-entrypoint.sh --datadir /var/lib/mysql-data
 
 FROM base
 
-COPY --from=init /var/lib/mysql-data /var/lib/mysql
-
-RUN chown mysql:mysql /var/lib/mysql
+COPY \
+    --from=init \
+    --chown=mysql:mysql \
+    /var/lib/mysql-data \
+    /var/lib/mysql
